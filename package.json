@@ -1,6 +1,6 @@
 {
-  "name": "latex-utensils",
-  "version": "4.1.1",
+  "name": "latex-utensils-yx",
+  "version": "4.1.2",
   "license": "MIT",
   "description": "A LaTeX parser and utilities",
   "homepage": "https://github.com/tamuratak/latex-utensils",
@@ -54,7 +54,7 @@
     "generate:latex_log:simple": "pegjs -o out/src/latex_log/latex_log_parser_simple.js src/latex_log/latex_log.pegjs",
     "generate:latex_log:trace": "pegjs -o out/src/latex_log/latex_log_parser_trace.js src/latex_log/latex_log.pegjs",
     "generate:latex_log": "run-p generate:latex_log:*",
-    "generate": "run-p 'generate:*'",
+    "generate": "run-p generate:*",
     "build": "run-s clean compile generate",
     "build:continue": "run-s -c clean compile generate",
     "compile": "tsc -p ./",

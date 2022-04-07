@@ -79,7 +79,7 @@ Element_p
   / Space
 
 MathElement =
-  x:MathElement_p skip_space
+  x:.
   { 
     return x;
   }
@@ -256,13 +256,13 @@ InlineMathShift
      skip_space eq:(!mathShift t:MathElement {return t;})+
     mathShift
   {
-    return { kind: "inlineMath", content: eq, location: location() };
+    return { kind: "inlineMath", content: eq.join(''), location: location() };
   }
   / mathShift
      whitespace eq:(!mathShift t:MathElement {return t;})*
     mathShift
   {
-    return { kind: "inlineMath", content: eq, location: location() };
+    return { kind: "inlineMath", content: eq.join(''), location: location() };
   }
 
 //inline math with \(\)
@@ -271,7 +271,7 @@ InlineMathParen
       skip_space x:(!endInlineMath x:MathElement {return x;})*
     endInlineMath
   {
-    return { kind: "inlineMath", content: x, location: location() };
+    return { kind: "inlineMath", content: x.join(''), location: location() };
   }
 
 //display math, \[\] and $$ $$.
@@ -284,7 +284,7 @@ displayMathSquareBracket
       skip_space x:(!endDisplayMath x:MathElement {return x;})*
     endDisplayMath
   {
-    return { kind: "displayMath", content: x, location: location() };
+    return { kind: "displayMath", content: x.join(''), location: location() };
   }
 
 displayMathShiftShift
@@ -292,7 +292,7 @@ displayMathShiftShift
       skip_space x:(!(mathShift mathShift) x:MathElement {return x;})*
     mathShift mathShift
   {
-    return { kind: "displayMath", content: x, location: location() };
+    return { kind: "displayMath", content: x.join(''), location: location() };
   }
 
 // \abc, \abc[...]{...}{...}
@@ -368,7 +368,7 @@ MathGroup
 MathGroup_p
   = beginGroup skip_space x:(!endGroup c:MathElement {return c;})* endGroup
   {
-    return { kind: "arg.group", content: x, location: location() };
+    return { kind: "arg.group", content: x.join(''), location: location() };
   }
 
 // \left( ... \right) in math mode.
@@ -383,7 +383,7 @@ MatchingDelimiters_p
       skip_space x:(!(escape "right" mathDelimiter) c:MathElement {return c;})*
     escape "right" skip_space r:$mathDelimiter
   {
-    return { kind: "math.matching_delimiters", left: l, right: r, content: x, location: location() };
+    return { kind: "math.matching_delimiters", left: l, right: r, content: x.join(''), location: location() };
   }
 
 mathDelimiter
@@ -404,19 +404,19 @@ MathematicalDelimiters_p
       x:(!(r:sizeCommand? ")") c:MathElement {return c;} )*
     r:$sizeCommand? skip_space ")"
   {
-    return { kind: "math.math_delimiters", lcommand: l, rcommand: r, left: "(", right: ")", content: x, location: location() };
+    return { kind: "math.math_delimiters", lcommand: l, rcommand: r, left: "(", right: ")", content: x.join(''), location: location() };
   }
   / l:$sizeCommand? skip_space "[" skip_space
       x:(!(r:sizeCommand? "]") c:MathElement {return c;} )*
     r:$sizeCommand? skip_space "]"
   {
-    return { kind: "math.math_delimiters", lcommand: l, rcommand: r, left: "[", right: "]", content: x, location: location() };
+    return { kind: "math.math_delimiters", lcommand: l, rcommand: r, left: "[", right: "]", content: x.join(''), location: location() };
   }
   / l:$sizeCommand? skip_space "\\{" skip_space
       x:(!(r:sizeCommand? "\\}") c:MathElement {return c;} )*
     r:$sizeCommand? skip_space "\\}"
   {
-    return { kind: "math.math_delimiters", lcommand: l, rcommand: r, left: "\\{", right: "\\}", content: x, location: location() };
+    return { kind: "math.math_delimiters", lcommand: l, rcommand: r, left: "\\{", right: "\\}", content: x.join(''), location: location() };
   }
 
 sizeCommand
@@ -480,7 +480,7 @@ MathEnvironment_p
       skip_space body:(!(skip_space endEnv) x:MathElement {return x;})* skip_space
     endEnv skip_space beginGroup n:mathEnvName endGroup &{ return name === n; }
   {
-    return { kind: "env.math.align", name, args: [], content: body, location: location() };
+    return { kind: "env.math.align", name, args: [], content: body.join(''), location: location() };
   }
 
 MathAlignedEnvironment
@@ -488,7 +488,7 @@ MathAlignedEnvironment
       skip_space body:(!endEnv x:MathElement {return x;})*
     endEnv skip_space beginGroup n:mahtAlignedEnvName endGroup &{ return name === n; }
   {
-    return { kind: "env.math.aligned", name, args: [], content: body, location: location() };
+    return { kind: "env.math.aligned", name, args: [], content: body.join(''), location: location() };
   }
 
 // return only envname without { and }
