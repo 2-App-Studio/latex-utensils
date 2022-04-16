@@ -4,7 +4,7 @@ import * as path from 'path'
 import * as util from 'util'
 import * as process from 'process'
 import * as commander from 'commander'
-import Tracer = require('pegjs-backtrace')
+import Tracer from 'pegjs-backtrace'
 
 function deleteLocation(node: any) {
     if (!node) {
