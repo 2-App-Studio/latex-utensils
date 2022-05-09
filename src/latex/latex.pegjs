@@ -352,10 +352,16 @@ Group
     return x;
   }
 
+GroupElement =
+  x:.
+  { 
+    return x;
+  }
+
 Group_p
-  = beginGroup skip_comment* x:(!endGroup c:Element {return c;})* endGroup
+  = beginGroup skip_comment* x:(!endGroup c:GroupElement {return c;})* endGroup
   {
-    return { kind: "arg.group", content: x, location: location() };
+    return { kind: "arg.group", content: x.join(''), location: location() };
   }
 
 // group that assumes you're in math mode.
