@@ -36,7 +36,7 @@ https://github.com/siefkenj/latex-parser
 
 Root
   = skip_space x:(Element)*
-  { 
+  {
     const comment = commentMap ? Array.from(commentMap.values()) : undefined;
     return { kind: "ast.root", content: x, comment };
   }
@@ -52,7 +52,7 @@ Preamble
 
 Element
   = x:Element_p skip_comment*
-  { 
+  {
     return x;
   }
 
@@ -80,7 +80,7 @@ Element_p
 
 MathElement =
   x:.
-  { 
+  {
     return x;
   }
 
@@ -521,7 +521,7 @@ beginInlineMath
 
 endInlineMath
   = escape ")"
-  
+
 beginEnv
   = escape "begin"
 
@@ -627,7 +627,7 @@ endDoc = endEnv skip_space beginGroup "document" endGroup
 // sp          "whitespace"   =   [ \t]+ { return " "; }// catcode 10
 
 // catcode 14, including the newline
-comment 
+comment
   = "%" c:$((!nl . )*) (nl / EOF)
   {
     return c;
@@ -685,7 +685,7 @@ skip_space "spaces"
 
 skip_comment
   = c:comment
-  { 
+  {
     if (options.enableComment) {
       const loc = location();
       const locJson = JSON.stringify(loc);
