@@ -462,7 +462,7 @@ Environment
   }
 
 Environment_p
-  = beginEnv name:groupedEnvname args:(ArgumentList / Group)*
+  = beginEnv name:groupedEnvname args:(ArgumentList)*
       skip_space body:(!(skip_space endEnv) x:Element {return x;})* skip_space
     endEnv n:groupedEnvname &{ return name === n; }
   {
