@@ -493,7 +493,7 @@ MathAlignedEnvironment
 
 // return only envname without { and }
 groupedEnvname
-  = skip_space beginGroup x:$(char+ "*"?) endGroup
+  = skip_space beginGroup x:$((char / '@')+ "*"?) endGroup
   {
     return x;
   }

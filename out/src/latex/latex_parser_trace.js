@@ -7256,10 +7256,28 @@ function peg$parse(input, options) {
       s4 = peg$currPos;
       s5 = [];
       s6 = peg$parsechar();
+      if (s6 === peg$FAILED) {
+        if (input.charCodeAt(peg$currPos) === 64) {
+          s6 = peg$c18;
+          peg$currPos++;
+        } else {
+          s6 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$e20); }
+        }
+      }
       if (s6 !== peg$FAILED) {
         while (s6 !== peg$FAILED) {
           s5.push(s6);
           s6 = peg$parsechar();
+          if (s6 === peg$FAILED) {
+            if (input.charCodeAt(peg$currPos) === 64) {
+              s6 = peg$c18;
+              peg$currPos++;
+            } else {
+              s6 = peg$FAILED;
+              if (peg$silentFails === 0) { peg$fail(peg$e20); }
+            }
+          }
         }
       } else {
         s5 = peg$FAILED;
