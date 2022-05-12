@@ -297,8 +297,7 @@ displayMathShiftShift
 
 // \abc, \abc[...]{...}{...}
 Command
-  = PrimitiveCharacterCommand
-  / LabelCommand
+  = LabelCommand
   / escape n:commandName args:(ArgumentList / Group)+
   {
     return { kind: "command", name: n, args: args, location: location() };
@@ -307,6 +306,7 @@ Command
   {
     return x;
   }
+  / PrimitiveCharacterCommand
 
 Command_p
   = escape n:commandName
