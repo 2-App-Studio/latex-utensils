@@ -2226,14 +2226,15 @@ function peg$parse(input, options) {
   }
 
   function peg$parseVerbatim() {
-    var s0, s1, s2;
+    var s0, s1, s2, s3;
 
     s0 = peg$currPos;
-    s1 = peg$parseVerbatim_p();
-    if (s1 !== peg$FAILED) {
-      s2 = peg$parseskip_space();
+    s1 = peg$parseskip_space();
+    s2 = peg$parseVerbatim_p();
+    if (s2 !== peg$FAILED) {
+      s3 = peg$parseskip_space();
       peg$savedPos = s0;
-      s0 = peg$f3(s1);
+      s0 = peg$f3(s2);
     } else {
       peg$currPos = s0;
       s0 = peg$FAILED;
@@ -2638,14 +2639,15 @@ function peg$parse(input, options) {
   }
 
   function peg$parseMinted() {
-    var s0, s1, s2;
+    var s0, s1, s2, s3;
 
     s0 = peg$currPos;
-    s1 = peg$parseMinted_p();
-    if (s1 !== peg$FAILED) {
-      s2 = peg$parseskip_space();
+    s1 = peg$parseskip_space();
+    s2 = peg$parseMinted_p();
+    if (s2 !== peg$FAILED) {
+      s3 = peg$parseskip_space();
       peg$savedPos = s0;
-      s0 = peg$f3(s1);
+      s0 = peg$f3(s2);
     } else {
       peg$currPos = s0;
       s0 = peg$FAILED;
@@ -2878,14 +2880,15 @@ function peg$parse(input, options) {
   }
 
   function peg$parseLstlisting() {
-    var s0, s1, s2;
+    var s0, s1, s2, s3;
 
     s0 = peg$currPos;
-    s1 = peg$parseLstlisting_p();
-    if (s1 !== peg$FAILED) {
-      s2 = peg$parseskip_space();
+    s1 = peg$parseskip_space();
+    s2 = peg$parseLstlisting_p();
+    if (s2 !== peg$FAILED) {
+      s3 = peg$parseskip_space();
       peg$savedPos = s0;
-      s0 = peg$f3(s1);
+      s0 = peg$f3(s2);
     } else {
       peg$currPos = s0;
       s0 = peg$FAILED;
