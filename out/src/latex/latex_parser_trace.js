@@ -6701,9 +6701,15 @@ function peg$parse(input, options) {
       if (s2 !== peg$FAILED) {
         s3 = [];
         s4 = peg$parseArgumentList();
+        if (s4 === peg$FAILED) {
+          s4 = peg$parseGroup();
+        }
         while (s4 !== peg$FAILED) {
           s3.push(s4);
           s4 = peg$parseArgumentList();
+          if (s4 === peg$FAILED) {
+            s4 = peg$parseGroup();
+          }
         }
         s4 = peg$parseskip_space();
         s5 = [];
