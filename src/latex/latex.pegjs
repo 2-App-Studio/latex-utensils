@@ -298,6 +298,8 @@ displayMathShiftShift
 // \abc, \abc[...]{...}{...}
 Command
   = LabelCommand
+  / PrimitiveCharacterCommand
+  / AtSignCharacterCommand
   / escape n:commandName args:(ArgumentList / Group)+
   {
     return { kind: "command", name: n, args: args, location: location() };
@@ -306,7 +308,6 @@ Command
   {
     return x;
   }
-  / PrimitiveCharacterCommand
 
 Command_p
   = escape n:commandName
@@ -321,7 +322,13 @@ commandName
   / .
 
 PrimitiveCharacterCommand
-  = escape c:[ $%#&{}_\-,/@]
+  = escape c:[ $%#&{}_\-,/]
+  {
+    return { kind: "command", name: c, args: [], location: location() };
+  }
+
+AtSignCharacterCommand
+  = escape c:$([@] !char)
   {
     return { kind: "command", name: c, args: [], location: location() };
   }
